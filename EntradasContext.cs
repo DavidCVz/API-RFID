@@ -17,8 +17,8 @@ namespace API_RFID
         //Definiendo las reglas de los atributos de cada entidad (Tabla)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             /// SEEDS
+            #region SEEDS
             var areaInit = new List<Area>();
             var turnosInit = new List<TipoTurno>();
             var trabajadorInit = new List<Trabajador>();
@@ -26,6 +26,7 @@ namespace API_RFID
             areaInit = seeds.GetAreasSeed();
             turnosInit = seeds.GetTurnosSeed();
             trabajadorInit = seeds.GetTrabajadoresSeed();
+            #endregion SEEDS
 
             /// TABLAS PADRES
             //Area
@@ -86,7 +87,6 @@ namespace API_RFID
             modelBuilder.Entity<Trabajador>().HasIndex(u => u.Email).IsUnique();
 
             ///HIJO (Nivel 2)
-            modelBuilder.Entity<EntradaSalida>().Property(p => p.Id).ValueGeneratedOnAdd(); // Estableciendo regla de autoincremento
             modelBuilder.Entity<EntradaSalida>(entradaS =>
             {
                 entradaS.ToTable("EntradaSalida");
@@ -106,6 +106,7 @@ namespace API_RFID
                 entradaS.Property(p => p.NombreArea).IsRequired().HasMaxLength(100);
                 entradaS.Property(p => p.Entrada).IsRequired();
             });
+            modelBuilder.Entity<EntradaSalida>().Property(p => p.Id).ValueGeneratedOnAdd(); // Estableciendo regla de autoincremento
         }
     }
 }
