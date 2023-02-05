@@ -51,6 +51,7 @@ namespace API_RFID
                 // Atributos
                 turno.Property(p => p.Nombre).IsRequired().HasMaxLength(100);
                 turno.Property(p => p.Entrada).IsRequired();
+                turno.Property(p => p.Salida).IsRequired();
                 // Seeds
                 turno.HasData(turnosInit);
             });

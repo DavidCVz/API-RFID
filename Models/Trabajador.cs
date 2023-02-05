@@ -9,8 +9,8 @@ public class Trabajador
 {
     // Claves de entidad
     public int TrabajadorID {get; set;}
-    public int AreaID {get; set;}
-    public int TipoTurnoID {get; set;}
+    public int? AreaID {get; set;}
+    public int? TipoTurnoID {get; set;}
 
     // Atributos de entidad
     public string RfidCode {get; set;}

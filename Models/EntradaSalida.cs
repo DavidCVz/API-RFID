@@ -7,7 +7,7 @@ public class EntradaSalida
 {
     // Claves de entidad
     public int Id {get; set;}
-    public int TrabajadorID {get; set;}
+    public int? TrabajadorID {get; set;}
 
     // Atributos de entidad
     public string RfidCode {get; set;}

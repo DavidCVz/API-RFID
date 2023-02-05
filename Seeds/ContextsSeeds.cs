@@ -41,7 +41,7 @@ public class ContextSeeds
         });
 
         turnosInit.Add(new TipoTurno { 
-            TipoTurnoID = 1, 
+            TipoTurnoID = 2, 
             Nombre = "Normal", 
             Entrada = new TimeSpan(7, 0, 0),
             Salida = new TimeSpan(18, 0, 0)
