@@ -45,7 +45,7 @@ namespace API_RFID
             //TipoTurno
             modelBuilder.Entity<TipoTurno>(turno =>
             {
-                turno.ToTable("Area");
+                turno.ToTable("TipoTurno");
                 // Clave primaria
                 turno.HasKey(p => p.TipoTurnoID);
                 // Atributos
