@@ -25,7 +25,10 @@ public class EntradasSalidasController : ControllerBase
     [HttpPost]
     public IActionResult Post([FromBody] RfidData rfidData)
     {
-        entradasService.Save(rfidData.rfidCode);
-        return Ok("Beep... RFID");
+        int res = entradasService.Save(rfidData.rfidCode);
+        if( res == 1) 
+            return Ok("Beep... RFID, Acceso correcto"); 
+        else 
+            return Ok("Beep... RFID, Tarjeta no reconocida");
     }
 }
