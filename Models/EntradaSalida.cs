@@ -23,5 +23,9 @@ public class EntradaSalida
     // Atributo relacionale
     //Padre
     public virtual Trabajador Trabajador { get; set; }
+}
 
+public class RfidData
+{
+    public string rfidCode {get; set;}
 }
