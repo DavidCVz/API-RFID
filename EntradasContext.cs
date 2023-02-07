@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using API_RFID.Models;
+using API_RFID.Seeds;
 
 namespace API_RFID
 {
@@ -11,58 +12,66 @@ namespace API_RFID
         public DbSet<Trabajador> Trabajadores { get; set; }
         public DbSet<EntradaSalida> EntradasSalidas { get; set; }
         public EntradasContext(DbContextOptions<EntradasContext> options) : base(options) { }
-
+        private ContextSeeds seeds = new ContextSeeds();
 
         //Definiendo las reglas de los atributos de cada entidad (Tabla)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            /// SEEDS
+            #region SEEDS
+            var areaInit = new List<Area>();
+            var turnosInit = new List<TipoTurno>();
+            var trabajadorInit = new List<Trabajador>();
+
+            areaInit = seeds.GetAreasSeed();
+            turnosInit = seeds.GetTurnosSeed();
+            trabajadorInit = seeds.GetTrabajadoresSeed();
+            #endregion SEEDS
+
             /// TABLAS PADRES
             //Area
             modelBuilder.Entity<Area>(area =>
             {
                 area.ToTable("Area");
                 // Clave primaria
-                area.HasKey(p => p.AreaID);
-
+                area.Property(p => p.AreaID).ValueGeneratedNever();
                 // Atributos
                 area.Property(p => p.Nombre).IsRequired().HasMaxLength(100);
-
                 // Para agregar datos iniciales a la tabla area se usa la funcion HasData
                 // recibiendo como parametro una lista de datos de areas
-                //area.HasData(areaInit);
+                area.HasData(areaInit);
             });
+            //modelBuilder.Entity<Area>().Property(p => p.AreaID).ValueGeneratedNever(); // Estableciendo regla de no autoincremento
+
 
             //TipoTurno
             modelBuilder.Entity<TipoTurno>(turno =>
             {
-                turno.ToTable("Area");
+                turno.ToTable("TipoTurno");
                 // Clave primaria
-                turno.HasKey(p => p.TipoTurnoID);
-
+                turno.Property(p => p.TipoTurnoID).ValueGeneratedNever();
                 // Atributos
                 turno.Property(p => p.Nombre).IsRequired().HasMaxLength(100);
                 turno.Property(p => p.Entrada).IsRequired();
-
-                // Para agregar datos iniciales a la tabla area se usa la funcion HasData
-                // recibiendo como parametro una lista de datos de areas
-                //area.HasData(areaInit);
+                turno.Property(p => p.Salida).IsRequired();
+                // Seeds
+                turno.HasData(turnosInit);
             });
+            //modelBuilder.Entity<TipoTurno>().Property(p => p.TipoTurnoID).ValueGeneratedNever(); // Estableciendo regla de no autoincremento
+
 
             ///HIJO (Nivel 1)
             modelBuilder.Entity<Trabajador>(trabajador =>
             {
                 trabajador.ToTable("Trabajador");
-
                 //Clave primaria
-                trabajador.HasKey(p => p.TrabajadorID);
-
+                trabajador.Property(p => p.TrabajadorID).ValueGeneratedNever();
                 // DEFINICION PARA CLAVES FORANEAS
                 // p.Area es la propiedad virtual en la clase Trabajador 
                 // p.Trabajadores es la propiedad virtual en la clase Area
                 // p.AreaID, es el atributo clave que relaciona las tablas en la clase Trabajador
                 trabajador.HasOne(p => p.Area).WithMany(p => p.Trabajadores).HasForeignKey(p => p.AreaID).OnDelete(DeleteBehavior.SetNull);
                 trabajador.HasOne(p => p.TipoTurno).WithMany(p => p.Trabajadores).HasForeignKey(p => p.TipoTurnoID).OnDelete(DeleteBehavior.SetNull);
-                
                 //Atributos
                 trabajador.Property(p => p.AreaID).IsRequired(false);
                 trabajador.Property(p => p.TipoTurnoID).IsRequired(false);
@@ -73,29 +82,25 @@ namespace API_RFID
                 trabajador.Property(p => p.Rfc).IsRequired().HasMaxLength(13);
                 trabajador.Property(p => p.Curp).IsRequired().HasMaxLength(18);
                 trabajador.Property(p => p.Email).IsRequired().HasMaxLength(255);
-
-                // Para agregar datos iniciales a la tabla Trabajador se usa la funcion HasData
-                // recibiendo como parametro una lista de datos de Categorias
-                // trabajador.HasData(TrabajadorsInit);
+                // Seeds
+                trabajador.HasData(trabajadorInit);
             });
             // Configuracion de Constraints de Trabajador
             modelBuilder.Entity<Trabajador>().HasIndex(u => u.RfidCode).IsUnique();
             modelBuilder.Entity<Trabajador>().HasIndex(u => u.Rfc).IsUnique();
             modelBuilder.Entity<Trabajador>().HasIndex(u => u.Curp).IsUnique();
             modelBuilder.Entity<Trabajador>().HasIndex(u => u.Email).IsUnique();
+            //modelBuilder.Entity<Trabajador>().Property(u => u.TrabajadorID).ValueGeneratedNever(); // Estableciendo regla de no autoincremento
+
 
             ///HIJO (Nivel 2)
-            modelBuilder.Entity<EntradaSalida>().Property(p => p.Id).ValueGeneratedOnAdd(); // Estableciendo regla de autoincremento
             modelBuilder.Entity<EntradaSalida>(entradaS =>
             {
                 entradaS.ToTable("EntradaSalida");
-
                 //Clave primaria
                 entradaS.HasKey(p => p.Id);
-
                 // DEFINICION PARA CLAVES FORANEAS
                 entradaS.HasOne(p => p.Trabajador).WithMany(p => p.Entradas).HasForeignKey(p => p.TrabajadorID).OnDelete(DeleteBehavior.SetNull);
-                
                 //Atributos
                 entradaS.Property(p => p.TrabajadorID).IsRequired(false);
                 entradaS.Property(p => p.RfidCode).IsRequired().HasMaxLength(10);
@@ -107,12 +112,8 @@ namespace API_RFID
                 entradaS.Property(p => p.NombreTurno).IsRequired().HasMaxLength(100);
                 entradaS.Property(p => p.NombreArea).IsRequired().HasMaxLength(100);
                 entradaS.Property(p => p.Entrada).IsRequired();
-
-                // Para agregar datos iniciales a la tabla Trabajador se usa la funcion HasData
-                // recibiendo como parametro una lista de datos de Categorias
-                // trabajador.HasData(TrabajadorsInit);
             });
-
+            modelBuilder.Entity<EntradaSalida>().Property(p => p.Id).ValueGeneratedOnAdd(); // Estableciendo regla de autoincremento
         }
     }
 }

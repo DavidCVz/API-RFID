@@ -7,7 +7,7 @@ public class EntradaSalida
 {
     // Claves de entidad
     public int Id {get; set;}
-    public int TrabajadorID {get; set;}
+    public int? TrabajadorID {get; set;}
 
     // Atributos de entidad
     public string RfidCode {get; set;}
@@ -20,8 +20,17 @@ public class EntradaSalida
     public string NombreArea {get; set;}
     public bool Entrada {get; set;}
 
-    // Atributo relacionale
+    // Atributo relacional
     //Padre
     public virtual Trabajador Trabajador { get; set; }
+}
 
+public class RfidData
+{
+    public string rfidCode {get; set;}
+}
+
+public class ParamsDelete
+{
+    public bool proceder {get; set;}
 }

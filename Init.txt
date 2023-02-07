@@ -1,0 +1,77 @@
+
+--- RESET DE SEED SQL SERVER
+DBCC CHECKIDENT ('[TestTable]', RESEED, 0);
+GO
+
+-- POSTs ENTRADAS SALIDAS
+{
+    "rfidCode" : "0000145235"
+}
+{
+    "rfidCode" : "0000145234"
+}
+{
+    "rfidCode" : "0000145233"
+}
+
+-- POSTs TRABAJADORES
+{
+    "TrabajadorID" : 1,
+    "AreaID" : 13,
+    "TipoTurnoID" : 1,
+    "RfidCode" : "0000145232",
+    "Nombres" : "David",
+    "A_Paterno" : "Carrillo",
+    "A_Materno" : "Velazquez",
+    "Rfc" : "CAVD990306LS4",
+    "Curp" : "CAVD990306HVZRLV01",
+    "Email" : "davidacarrillovz@outlook.com"
+}
+{
+    "TrabajadorID" : 2,
+    "AreaID" : 4,
+    "TipoTurnoID" : 1,
+    "RfidCode" : "0000145233",
+    "Nombres" : "Juan Manuel",
+    "A_Paterno" : "Torres",
+    "A_Materno" : "Beltrán",
+    "Rfc" : "TOBJ980528ZK8",
+    "Curp" : "TOBJ980528JUT9P4",
+    "Email" : "juanmanueltb06@outlook.com"
+}
+{
+    "TrabajadorID" : 3,
+    "AreaID" : 10,
+    "TipoTurnoID" : 2,
+    "RfidCode" : "0000145234",
+    "Nombres" : "Oscar",
+    "A_Paterno" : "Jimenez",
+    "A_Materno" : "Shimabuko",
+    "Rfc" : "JISO980619MI6",
+    "Curp" : "JISO980619HVJRMK07",
+    "Email" : "oscjimenez55@outlook.com"
+}
+{
+    "TrabajadorID" : 4,
+    "AreaID" : 13,
+    "TipoTurnoID" : 1,
+    "RfidCode" : "0000145235",
+    "Nombres" : "Márcos Antonio",
+    "A_Paterno" : "Gonzalez",
+    "A_Materno" : "Belmán",
+    "Rfc" : "GOBM990427YU9",
+    "Curp" : "GOBM990427HVZRBB41",
+    "Email" : "marcosgblm99@outlook.com"
+}
+{
+    "TrabajadorID" : 5,
+    "AreaID" : 8,
+    "TipoTurnoID" : 1,
+    "RfidCode" : "0000145236",
+    "Nombres" : "Alba Esmeralda",
+    "A_Paterno" : "Yela",
+    "A_Materno" : "Flores",
+    "Rfc" : "FYAE211207MEK",
+    "Curp" : "FYAE211207HVZK1M91",
+    "Email" : "albaMeme@outlook.com"
+}
