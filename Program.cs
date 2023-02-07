@@ -19,7 +19,6 @@ builder.Services.AddScoped<ITiposTurnosService, TiposTurnosService>();
 builder.Services.AddScoped<ITrabajadoresService, TrabajadoresService>(); 
 builder.Services.AddScoped<IEntradasSalidasService, EntradasSalidasService>(); 
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -17,8 +17,7 @@ namespace APIRFID.Migrations
                 name: "Area",
                 columns: table => new
                 {
-                    AreaID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AreaID = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -30,8 +29,7 @@ namespace APIRFID.Migrations
                 name: "TipoTurno",
                 columns: table => new
                 {
-                    TipoTurnoID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoTurnoID = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Entrada = table.Column<TimeSpan>(type: "time", nullable: false),
                     Salida = table.Column<TimeSpan>(type: "time", nullable: false)
@@ -45,8 +43,7 @@ namespace APIRFID.Migrations
                 name: "Trabajador",
                 columns: table => new
                 {
-                    TrabajadorID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TrabajadorID = table.Column<int>(type: "int", nullable: false),
                     AreaID = table.Column<int>(type: "int", nullable: true),
                     TipoTurnoID = table.Column<int>(type: "int", nullable: true),
                     RfidCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),

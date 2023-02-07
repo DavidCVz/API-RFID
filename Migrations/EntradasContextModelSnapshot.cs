@@ -25,10 +25,7 @@ namespace APIRFID.Migrations
             modelBuilder.Entity("API_RFID.Models.Area", b =>
                 {
                     b.Property<int>("AreaID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AreaID"));
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -110,10 +107,7 @@ namespace APIRFID.Migrations
             modelBuilder.Entity("API_RFID.Models.TipoTurno", b =>
                 {
                     b.Property<int>("TipoTurnoID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipoTurnoID"));
 
                     b.Property<TimeSpan>("Entrada")
                         .HasColumnType("time");
@@ -150,10 +144,7 @@ namespace APIRFID.Migrations
             modelBuilder.Entity("API_RFID.Models.Trabajador", b =>
                 {
                     b.Property<int>("TrabajadorID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TrabajadorID"));
 
                     b.Property<string>("A_Materno")
                         .IsRequired()

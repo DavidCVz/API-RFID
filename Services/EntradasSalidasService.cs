@@ -15,6 +15,11 @@ public class EntradasSalidasService : IEntradasSalidasService
         return context.EntradasSalidas;
     }
 
+    public IEnumerable<EntradaSalida> GetTrabajador(int TrabajadorID)
+    {
+        return context.EntradasSalidas.Where(p => p.TrabajadorID == TrabajadorID);
+    }
+
     public int Save(string rfidCode)
     {
         bool ultimaEntrada;
@@ -65,10 +70,19 @@ public class EntradasSalidasService : IEntradasSalidasService
             return 0;
         }
     }
+
+    public void DeleteRegistrosNulos()
+    {
+        var consulta = context.EntradasSalidas.Where(p => p.TrabajadorID == null);
+        context.RemoveRange(consulta);
+        context.SaveChanges();
+    }
 }
 
 public interface IEntradasSalidasService
 {
     IEnumerable<EntradaSalida> Get();
     int Save(string rfidCode);
+    IEnumerable<EntradaSalida> GetTrabajador(int TrabajadorID);
+    void DeleteRegistrosNulos();
 }

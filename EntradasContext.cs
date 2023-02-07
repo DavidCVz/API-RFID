@@ -34,20 +34,22 @@ namespace API_RFID
             {
                 area.ToTable("Area");
                 // Clave primaria
-                area.HasKey(p => p.AreaID);
+                area.Property(p => p.AreaID).ValueGeneratedNever();
                 // Atributos
                 area.Property(p => p.Nombre).IsRequired().HasMaxLength(100);
                 // Para agregar datos iniciales a la tabla area se usa la funcion HasData
                 // recibiendo como parametro una lista de datos de areas
                 area.HasData(areaInit);
             });
+            //modelBuilder.Entity<Area>().Property(p => p.AreaID).ValueGeneratedNever(); // Estableciendo regla de no autoincremento
+
 
             //TipoTurno
             modelBuilder.Entity<TipoTurno>(turno =>
             {
                 turno.ToTable("TipoTurno");
                 // Clave primaria
-                turno.HasKey(p => p.TipoTurnoID);
+                turno.Property(p => p.TipoTurnoID).ValueGeneratedNever();
                 // Atributos
                 turno.Property(p => p.Nombre).IsRequired().HasMaxLength(100);
                 turno.Property(p => p.Entrada).IsRequired();
@@ -55,13 +57,15 @@ namespace API_RFID
                 // Seeds
                 turno.HasData(turnosInit);
             });
+            //modelBuilder.Entity<TipoTurno>().Property(p => p.TipoTurnoID).ValueGeneratedNever(); // Estableciendo regla de no autoincremento
+
 
             ///HIJO (Nivel 1)
             modelBuilder.Entity<Trabajador>(trabajador =>
             {
                 trabajador.ToTable("Trabajador");
                 //Clave primaria
-                trabajador.HasKey(p => p.TrabajadorID);
+                trabajador.Property(p => p.TrabajadorID).ValueGeneratedNever();
                 // DEFINICION PARA CLAVES FORANEAS
                 // p.Area es la propiedad virtual en la clase Trabajador 
                 // p.Trabajadores es la propiedad virtual en la clase Area
@@ -86,6 +90,8 @@ namespace API_RFID
             modelBuilder.Entity<Trabajador>().HasIndex(u => u.Rfc).IsUnique();
             modelBuilder.Entity<Trabajador>().HasIndex(u => u.Curp).IsUnique();
             modelBuilder.Entity<Trabajador>().HasIndex(u => u.Email).IsUnique();
+            //modelBuilder.Entity<Trabajador>().Property(u => u.TrabajadorID).ValueGeneratedNever(); // Estableciendo regla de no autoincremento
+
 
             ///HIJO (Nivel 2)
             modelBuilder.Entity<EntradaSalida>(entradaS =>
