@@ -29,6 +29,7 @@ public class TrabajadoresService : ITrabajadoresService
         {
             trabajadorActual.AreaID = trabajador.AreaID;
             trabajadorActual.TipoTurnoID = trabajador.TipoTurnoID;
+            trabajadorActual.RfidCode = trabajador.RfidCode;
             trabajadorActual.Nombres = trabajador.Nombres;
             trabajadorActual.A_Paterno = trabajador.A_Paterno;
             trabajadorActual.A_Materno = trabajador.A_Materno;

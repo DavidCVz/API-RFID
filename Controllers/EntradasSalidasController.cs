@@ -20,7 +20,6 @@ public class EntradasSalidasController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        Console.WriteLine("Operacion GET");
         return Ok(entradasService.Get());
     }
 
