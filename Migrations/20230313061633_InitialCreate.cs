@@ -43,7 +43,8 @@ namespace APIRFID.Migrations
                 name: "Trabajador",
                 columns: table => new
                 {
-                    TrabajadorID = table.Column<int>(type: "int", nullable: false),
+                    TrabajadorID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     AreaID = table.Column<int>(type: "int", nullable: true),
                     TipoTurnoID = table.Column<int>(type: "int", nullable: true),
                     RfidCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),

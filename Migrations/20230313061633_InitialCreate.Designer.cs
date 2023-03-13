@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIRFID.Migrations
 {
     [DbContext(typeof(EntradasContext))]
-    [Migration("20230206223621_InitialCreate")]
+    [Migration("20230313061633_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -147,7 +147,10 @@ namespace APIRFID.Migrations
             modelBuilder.Entity("API_RFID.Models.Trabajador", b =>
                 {
                     b.Property<int>("TrabajadorID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TrabajadorID"));
 
                     b.Property<string>("A_Materno")
                         .IsRequired()

@@ -144,7 +144,10 @@ namespace APIRFID.Migrations
             modelBuilder.Entity("API_RFID.Models.Trabajador", b =>
                 {
                     b.Property<int>("TrabajadorID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TrabajadorID"));
 
                     b.Property<string>("A_Materno")
                         .IsRequired()

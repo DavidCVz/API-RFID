@@ -65,7 +65,7 @@ namespace API_RFID
             {
                 trabajador.ToTable("Trabajador");
                 //Clave primaria
-                trabajador.Property(p => p.TrabajadorID).ValueGeneratedNever();
+                trabajador.HasKey(p => p.TrabajadorID);
                 // DEFINICION PARA CLAVES FORANEAS
                 // p.Area es la propiedad virtual en la clase Trabajador 
                 // p.Trabajadores es la propiedad virtual en la clase Area
@@ -86,6 +86,7 @@ namespace API_RFID
                 trabajador.HasData(trabajadorInit);
             });
             // Configuracion de Constraints de Trabajador
+            //modelBuilder.Entity<Trabajador>().Property(u => u.TrabajadorID).ValueGeneratedOnAdd(); // Estableciendo regla de autoincremento
             modelBuilder.Entity<Trabajador>().HasIndex(u => u.RfidCode).IsUnique();
             modelBuilder.Entity<Trabajador>().HasIndex(u => u.Rfc).IsUnique();
             modelBuilder.Entity<Trabajador>().HasIndex(u => u.Curp).IsUnique();
