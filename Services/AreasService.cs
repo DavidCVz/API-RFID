@@ -15,6 +15,11 @@ public class AreasService : IAreasService
         return context.Areas;
     }
 
+    public Area GetArea(int id)
+    {
+        return context.Areas.Find(id);
+    }
+
     public void Save(Area area)
     {
         context.Areas.Add(area);
@@ -48,6 +53,7 @@ public class AreasService : IAreasService
 public interface IAreasService
 {
     IEnumerable<Area> Get();
+    Area GetArea(int id);
     void Save(Area area);
     void Update(int id, Area area);
     void Delete(int id);

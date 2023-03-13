@@ -21,6 +21,19 @@ public class AreaController : ControllerBase
         return Ok(areaService.Get());
     }
 
+    // Retorna una consulta de todos los datos
+    [HttpGet("{id}")]
+    public IActionResult GetArea(int id)
+    {
+        var area = areaService.GetArea(id);
+        if (area != null)
+        {
+            return Ok(area);
+        }else{
+            return NotFound($"El area con id {id} no existe");
+        }
+    }
+
     [HttpPost]
     public IActionResult Post([FromBody] Area area)
     {

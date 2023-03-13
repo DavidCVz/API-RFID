@@ -30,10 +30,15 @@ public class EntradasSalidasController : ControllerBase
 
         int _page = page ?? 1;
         int totalRecords = hTrabajador.Count();
+        if (totalRecords == 0)
+        {
+            return NotFound();
+        }
+
         int totalPages = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(totalRecords/records)));
 
         var res = hTrabajador.Skip((_page-1) * records).Take(records).ToList();
-
+        
         return Ok(new{
             totalPaginas = totalPages,
             resultados = res,

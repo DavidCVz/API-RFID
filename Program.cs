@@ -18,6 +18,17 @@ builder.Services.AddScoped<IAreasService, AreasService>();
 builder.Services.AddScoped<ITiposTurnosService, TiposTurnosService>(); 
 builder.Services.AddScoped<ITrabajadoresService, TrabajadoresService>(); 
 builder.Services.AddScoped<IEntradasSalidasService, EntradasSalidasService>(); 
+builder.Services.AddCors(options =>
+    {
+        // this defines a CORS policy called "default"
+        options.AddPolicy("default", policy =>
+        {
+            policy.WithOrigins("http://localhost:5242")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin();
+        });
+    });
 
 var app = builder.Build();
 
@@ -31,6 +42,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("default");
 
 app.MapControllers();
 
