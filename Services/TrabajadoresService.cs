@@ -15,6 +15,11 @@ public class TrabajadoresService : ITrabajadoresService
         return context.Trabajadores;
     }
 
+    public Trabajador GetTrabajador(int id)
+    {
+        return context.Trabajadores.Find(id);
+    }
+
     public void Save(Trabajador trabajador)
     {
         context.Trabajadores.Add(trabajador);
@@ -57,6 +62,7 @@ public class TrabajadoresService : ITrabajadoresService
 public interface ITrabajadoresService
 {
     IEnumerable<Trabajador> Get();
+    Trabajador GetTrabajador(int id);
     void Save(Trabajador trabajador);
     void Update(int id, Trabajador trabajador);
     void Delete(int id);

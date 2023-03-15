@@ -52,10 +52,10 @@ public class EntradasSalidasController : ControllerBase
         int res = entradasService.Save(rfidData.rfidCode);
         if( res == 1) {
             Console.Beep(2000, 500);
-            return Ok("Beep... RFID, Acceso correcto"); 
+            return Ok(1); 
         }else{
             Console.Beep(2000, 500);
-            return Ok("Beep... RFID, Tarjeta no reconocida");
+            return Ok(0);
         }
     }
 

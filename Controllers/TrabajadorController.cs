@@ -21,6 +21,18 @@ public class TrabajadorController : ControllerBase
         return Ok(trabajadorService.Get());
     }
 
+    [HttpGet("{id}")]
+    public IActionResult GetTrabajador(int id)
+    {
+        var trabajador = trabajadorService.GetTrabajador(id);
+        if (trabajador != null)
+        {
+            return Ok(trabajadorService.GetTrabajador(id));
+        }else{
+            return Ok(null);
+        }
+    }
+
     [HttpPost]
     public IActionResult Post([FromBody] Trabajador trabajador)
     {
